@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Reservation</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@14.7.0/distribute/nouislider.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+        
+		<link href="./allure.css" rel="stylesheet" type="text/css">
+		<script src="./allure-classes.js"></script>
+		<script src="./allure-database.js"></script>
+		<script src="./allure-preload.js"></script>
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <!-- Service buttons -->
+            <div class="row p-3 row-first-line">
+                <div class="col-6 col-md-2 top-main-logo">
+                    <!--<a>
+                        <img height="50px" src="https://static.tildacdn.net/tild6330-3334-4063-b738-386239393935/Horizontal_Logo_3.svg" onClick="addPropertiesCar()" alt="Allure logo" style="width: 100%;">
+                    </a>-->
+                    <a href="https://allurepremiumservice.com/">
+                        <img src="https://static.tildacdn.net/tild6330-3334-4063-b738-386239393935/Horizontal_Logo_3.svg" alt="Allure logo">
+                    </a>
+                </div>
+                <div class="col-md-2 d-none d-md-flex top-main-buttons">
+                    <button type="button" class="btn btn-dark service-button" onclick="showDiv('mainColumn1', 'filter1')">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,300,150"
+                            style="fill:#FFFFFF; margin-bottom: 0.5em;">
+                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M25,1.05078c-0.2175,0 -0.43414,0.06898 -0.61914,0.20898l-23,17.95117c-0.43,0.34 -0.50992,0.9682 -0.16992,1.4082c0.34,0.43 0.9682,0.50992 1.4082,0.16992l1.38086,-1.07812v26.28906c0,0.55 0.45,1 1,1h14v-18h12v18h14c0.55,0 1,-0.45 1,-1v-26.28906l1.38086,1.07812c0.19,0.14 0.39914,0.21094 0.61914,0.21094c0.3,0 0.58906,-0.13086 0.78906,-0.38086c0.34,-0.44 0.26008,-1.0682 -0.16992,-1.4082l-23,-17.95117c-0.185,-0.14 -0.40164,-0.20898 -0.61914,-0.20898zM35,5v1.05078l6,4.67969v-5.73047z" alt="apartment button"></path></g></g>
+                        </svg>
+                        Apartments
+                    </button>
+                    <button type="button" class="btn btn-dark service-button" onclick="showDiv('mainColumn2', 'filter2')">
+                        <img height="20px" width="20px" src="https://img.icons8.com/ios-filled/50/FFFFFF/car.png" alt="car button" style="margin-bottom: 0.1em;">
+                        Cars
+                    </button>
+                    <button type="button" class="btn btn-dark service-button" onclick="showDiv('mainColumn3', 'filter3')">
+                        <img height="20px" width="20px" src="https://img.icons8.com/ios-glyphs/60/FFFFFF/yacht.png" alt="yacht button" style="margin-bottom: 0.1em;">
+                        Yachts
+                    </button>
+                    <button type="button" class="btn btn-dark service-button" onclick="showDiv('mainColumn4', 'filter4')">
+                        <img height="20px" width="20px" src="https://img.icons8.com/material-sharp/24/FFFFFF/airplane-mode-on.png" alt="plane button" style="margin-bottom: 0.1em;">
+                        Planes
+                    </button>
+                </div>
+                <div class="col-6 col-md-2 text-right">
+					<a data-toggle="modal" data-target="#cartModal" onclick="openCart()">
+                        <img height="50px" width="50px" src="https://img.icons8.com/?size=512&amp;id=59997&amp;format=png" alt="Cart">
+						<span id="cartBadge" class="badge badge-pill badge-dark position-absolute cart-badge"></span>
+                    </a>
+				</div>
+            </div>
+			<div class="row d-md-none p-3 row-first-line">
+				<div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 col-12 d-md-none top-main-buttons">
+                    <button type="button" class="btn btn-dark service-button" onclick="showDiv('mainColumn1', 'filter1')">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0,0,300,150"
+                            style="fill:#FFFFFF; margin-bottom: 0.5em;">
+                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M25,1.05078c-0.2175,0 -0.43414,0.06898 -0.61914,0.20898l-23,17.95117c-0.43,0.34 -0.50992,0.9682 -0.16992,1.4082c0.34,0.43 0.9682,0.50992 1.4082,0.16992l1.38086,-1.07812v26.28906c0,0.55 0.45,1 1,1h14v-18h12v18h14c0.55,0 1,-0.45 1,-1v-26.28906l1.38086,1.07812c0.19,0.14 0.39914,0.21094 0.61914,0.21094c0.3,0 0.58906,-0.13086 0.78906,-0.38086c0.34,-0.44 0.26008,-1.0682 -0.16992,-1.4082l-23,-17.95117c-0.185,-0.14 -0.40164,-0.20898 -0.61914,-0.20898zM35,5v1.05078l6,4.67969v-5.73047z" alt="apartment button"></path></g></g>
+                        </svg>
+                        Apartments
+                    </button>
+                    <button type="button" class="btn btn-dark service-button" onclick="showDiv('mainColumn2', 'filter2')">
+                        <img height="20px" width="20px" src="https://img.icons8.com/ios-filled/50/FFFFFF/car.png" alt="car button" style="margin-bottom: 0.1em;">
+                        Cars
+                    </button>
+                    <button type="button" class="btn btn-dark service-button" onclick="showDiv('mainColumn3', 'filter3')">
+                        <img height="20px" width="20px" src="https://img.icons8.com/ios-glyphs/60/FFFFFF/yacht.png" alt="yacht button" style="margin-bottom: 0.1em;">
+                        Yachts
+                    </button>
+                    <button type="button" class="btn btn-dark service-button" onclick="showDiv('mainColumn4', 'filter4')">
+                        <img height="20px" width="20px" src="https://img.icons8.com/material-sharp/24/FFFFFF/airplane-mode-on.png" alt="plane button" style="margin-bottom: 0.1em;">
+                        Planes
+                    </button>
+                </div>
+			</div>
+        
+            <!-- Row 3 - with filter and content -->
+            <div class="row row-father">
+				<div id="filter1" class="col-12 serviceDiv filters-col">
+					<div class="row row-top-father">
+						<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-no-padding col-top-left">
+							<div class="row row-top-left">
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-left">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonAptType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Type</b>
+										</button>
+										<div id="aptTypeDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonAptType">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-right">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonAptSale" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Sale</b>
+										</button>
+										<div id="aptSaleDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonAptSale">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-left">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonAptMonthRent" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Time rent</b>
+										</button>
+										<div id="aptMonthRentDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonAptMonthRent">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-right">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonAptPrice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Price</b>
+										</button>
+										<div id="aptPriceDropdown" class="dropdown-menu dropdown-menu-price" aria-labelledby="dropdownMenuButtonAptPrice">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-no-padding col-top-right">
+							<div class="row row-top-right">
+								<div class="col-6 col-md-3 filters-col-calendar filters-col-calendar-each">
+									<div class="dropdown dropdown-filters-left">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonServCity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b class="filters-dropdown-city-text">City</b>
+										</button>
+										<div class="dropdown-menu servCityDropdown" aria-labelledby="dropdownMenuButtonServCity">
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md-3 filters-col-calendar filters-col-calendar-each">
+									<div class="dropdown dropdown-filters-right">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonServPpl" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b class="filters-dropdown-ppl-text">People</b>
+										</button>
+										<div class="dropdown-menu servPplDropdown" aria-labelledby="dropdownMenuButtonServPpl">
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-md-6 filters-col-calendar">
+									<div class="input-group date input-daterange datepicker-input" data-provide="datepicker">
+										<input type="text" class="form-control form-control-left datepicker-input-start" placeholder="Start date">
+										<div class="input-group-addon">to</div>
+										<input type="text" class="form-control form-control-right datepicker-input-end" placeholder="End date">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="filter2" class="col-12 serviceDiv filters-col">
+					<div class="row row-top-father">
+						<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-no-padding col-top-left">
+							<div class="row row-top-left">
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-left">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonCarBrand" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Brand</b>
+										</button>
+										<div id="carBrandDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonCarBrand">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-right">
+										<button class="btn dropdown-toggle filter-dropdown-button disabled" type="button" id="dropdownMenuButtonCarModel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Model</b>
+										</button>
+										<div id="carModelDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonCarModel">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-left">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonCarColor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Color</b>
+										</button>
+										<div id="carColorDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonCarColor">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-right">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonCarPrice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Price</b>
+										</button>
+										<div id="carPriceDropdown" class="dropdown-menu dropdown-menu-price" aria-labelledby="dropdownMenuButtonCarPrice">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-no-padding col-top-right">
+							<div class="row row-top-right">
+								<div class="col-6 col-md-3 filters-col-calendar filters-col-calendar-each">
+									<div class="dropdown dropdown-filters-left">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonServCity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b class="filters-dropdown-city-text">City</b>
+										</button>
+										<div class="dropdown-menu servCityDropdown" aria-labelledby="dropdownMenuButtonServCity">
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md-3 filters-col-calendar filters-col-calendar-each">
+									<div class="dropdown dropdown-filters-right">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonServPpl" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b class="filters-dropdown-ppl-text">People</b>
+										</button>
+										<div class="dropdown-menu servPplDropdown" aria-labelledby="dropdownMenuButtonServPpl">
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-md-6 filters-col-calendar">
+									<div class="input-group date input-daterange datepicker-input" data-provide="datepicker">
+										<input type="text" class="form-control form-control-left datepicker-input-start" placeholder="Start date">
+										<div class="input-group-addon">to</div>
+										<input type="text" class="form-control form-control-right datepicker-input-end" placeholder="End date">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="filter3" class="col-12 serviceDiv filters-col">
+					<div class="row row-top-father">
+						<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-no-padding col-top-left">
+							<div class="row row-top-left">
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-left">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonYachtMaxPeople" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Max People</b>
+										</button>
+										<div id="yachtMaxPeopleDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonYachtMaxPeople">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-right">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonYachtCabins" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Cabins</b>
+										</button>
+										<div id="yachtCabinsDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonYachtCabins">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-left">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonYachtBathrooms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Bathrooms</b>
+										</button>
+										<div id="yachtBathroomsDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonYachtBathrooms">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md filters-col-each">
+									<div class="dropdown dropdown-filters-right">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonYachtPrice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Price</b>
+										</button>
+										<div id="yachtPriceDropdown" class="dropdown-menu dropdown-menu-price" aria-labelledby="dropdownMenuButtonYachtPrice">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-no-padding col-top-right">
+							<div class="row row-top-right">
+								<div class="col-6 col-md-3 filters-col-calendar filters-col-calendar-each">
+									<div class="dropdown dropdown-filters-left">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonServCity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b class="filters-dropdown-city-text">City</b>
+										</button>
+										<div class="dropdown-menu servCityDropdown" aria-labelledby="dropdownMenuButtonServCity">
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md-3 filters-col-calendar filters-col-calendar-each">
+									<div class="dropdown dropdown-filters-right">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonServPpl" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b class="filters-dropdown-ppl-text">People</b>
+										</button>
+										<div class="dropdown-menu servPplDropdown" aria-labelledby="dropdownMenuButtonServPpl">
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-md-6 filters-col-calendar">
+									<div class="input-group date input-daterange datepicker-input" data-provide="datepicker">
+										<input type="text" class="form-control form-control-left datepicker-input-start" placeholder="Start date">
+										<div class="input-group-addon">to</div>
+										<input type="text" class="form-control form-control-right datepicker-input-end" placeholder="End date">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="filter4" class="col-12 serviceDiv filters-col">
+					<div class="row row-top-father">
+						<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-no-padding col-top-left">
+							<div class="row row-top-left row-top-left-1">
+								<div class="col-12 col-md filters-col-each">
+									<div class="dropdown">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonPlanePassengers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b>Passengers</b>
+										</button>
+										<div id="planePassengersDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButtonPlanePassengers">
+											<!--Content-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-no-padding col-top-right">
+							<div class="row row-top-right">
+								<div class="col-6 col-md-3 filters-col-calendar filters-col-calendar-each">
+									<div class="dropdown dropdown-filters-left">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonServCity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b class="filters-dropdown-city-text">City</b>
+										</button>
+										<div class="dropdown-menu servCityDropdown" aria-labelledby="dropdownMenuButtonServCity">
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-md-3 filters-col-calendar filters-col-calendar-each">
+									<div class="dropdown dropdown-filters-right">
+										<button class="btn dropdown-toggle filter-dropdown-button" type="button" id="dropdownMenuButtonServPpl" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<b class="filters-dropdown-ppl-text">People</b>
+										</button>
+										<div class="dropdown-menu servPplDropdown" aria-labelledby="dropdownMenuButtonServPpl">
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-md-6 filters-col-calendar">
+									<div class="input-group date input-daterange datepicker-input" data-provide="datepicker">
+										<input type="text" class="form-control form-control-left datepicker-input-start" placeholder="Start date">
+										<div class="input-group-addon">to</div>
+										<input type="text" class="form-control form-control-right datepicker-input-end" placeholder="End date">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+                <!-- Content columns -->
+                <div id="mainColumn1" class="serviceDiv col-12">
+                    <div id="apartmentRow" class="row service-row"></div>
+                </div>
+
+                <div id="mainColumn2" class="serviceDiv col-12">
+                    <div id="carRow" class="row service-row"></div>
+                    <nav class="pagination-buttons" aria-label="carPages">
+                        <ul class="pagination pagination-sm pagination-cars"></ul>
+                    </nav>
+                </div>
+
+                <div id="mainColumn3" class="serviceDiv col-12">
+                    <div id="yachtRow" class="row service-row"></div>
+                </div>
+
+                <div id="mainColumn4" class="serviceDiv col-12">
+                    <div id="planeRow" class="row service-row"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Modals *********************************** -->
+
+        <!-- Cart -->
+        <div id="cartModal" class="modal fade right cart-modal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-full-height modal-right modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title">CART</h1>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="cartModalBody" class="modal-body">
+						<div class="row modal-body-row-father">
+							<div class="col-12">
+								<div class="row modal-body-row">
+									<div class="col-12">
+										<h3 id="apartmentTitleTextCart" class="textCenter"></h3>
+									</div>
+									<div class="col-12">
+										<div id="apartmentsContainer" class="container container-cart-service"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="row modal-body-row">
+									<div class="col-12">
+										<h3 id="carTitleTextCart" class="textCenter"></h3>
+									</div>
+									<div class="col-12">
+										<div id="carsContainer" class="container container-cart-service"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="row modal-body-row">
+									<div class="col-12">
+										<h3 id="yachtTitleTextCart" class="textCenter"></h3>
+									</div>
+									<div class="col-12">
+										<div id="yachtsContainer" class="container container-cart-service"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="row modal-body-row">
+									<div class="col-12">
+										<h3 id="planeTitleTextCart" class="textCenter"></h3>
+									</div>
+									<div class="col-12">
+										<div id="planesContainer" class="container container-cart-service"></div>
+									</div>
+								</div>
+							</div>
+							<br/>
+							<div class="col-12">
+								<div id="totalRow" class="row">
+									<div class="col-md-1"></div>
+									<div class="col-6 col-md-2"><h4 class="mb-0">TOTAL</h4></div>
+									<div class="col-6 col-md-3"><h6 id="totalCart" class="mb-0"></h6></div>
+									<div class="col-md"></div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div id="emptyCart" class="row modal-body-row">
+									<div class="col-1"></div>
+									<div class="col-11"><h4>EMPTY</h4></div>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<!-- Show -->
+		<div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-dialog-size" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="showModalTitle"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div id="showModalBody" class="modal-body"></div>
+					<div class="modal-footer">
+						<div class="modal-footer-left-buttons">
+							<button id="showModalAddToCart" type="button" class="btn filter-dropdown-button">Add to cart</button>
+						</div>
+						<div class="modal-footer-right-buttons ml-auto">
+							<button id="showModalMoreDetails" type="button" class="btn filter-dropdown-button">See more details</button>
+							<button type="button" class="btn filter-dropdown-button" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		
+		<!-- DatePicker -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.es.min.js"></script>
+        
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+
+        <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+        <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics-compat.js"></script>
+
+        <!-- Add Firebase products that you want to use -->
+        <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+
+		<!-- Slider -->
+		<script src="https://cdn.jsdelivr.net/npm/nouislider@14.7.0/distribute/nouislider.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js"></script>
+		
+        <script src="./allure.js"></script>
+    </body>
+</html>
